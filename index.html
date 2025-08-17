@@ -281,7 +281,80 @@
       closeBot.onclick = () => { modal.style.display = "none"; };
       sendBtn.onclick = handleMsg;
       input.addEventListener('keydown', e => { if (e.key === "Enter") handleMsg(); });
-    });
-  </script>
+      <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Real-Time News: Currency, Science & Technology</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fafafa; }
+        header { background: #232f3e; color: #fff; padding: 1em; text-align: center; }
+        section { margin: 2em auto; max-width: 900px; background: #fff; padding: 1em 2em; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        h2 { color: #0077b6; margin-top: 0; }
+        .news-list { list-style: none; padding: 0; }
+        .news-list li { margin-bottom: 1em; }
+        .widget { margin: 1em 0; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Real-Time News: Currency, Science & Technology</h1>
+        <p>Latest updates from around the world</p>
+    </header>
+
+    <section>
+        <h2>Currency News & Rates</h2>
+        <!-- Example: Embed a live currency rates widget -->
+        <div class="widget">
+            <iframe src="https://www.xe.com/currencyconverter/widget/" width="100%" height="400" frameborder="0"></iframe>
+        </div>
+        <ul class="news-list" id="currency-news">
+            <!-- Real-time currency news will appear here via API integration -->
+        </ul>
+    </section>
+    
+    <section>
+        <h2>Science News</h2>
+        <ul class="news-list" id="science-news">
+            <!-- Real-time science news will appear here via API integration -->
+        </ul>
+    </section>
+    
+    <section>
+        <h2>Technology News</h2>
+        <ul class="news-list" id="tech-news">
+            <!-- Real-time technology news will appear here via API integration -->
+        </ul>
+    </section>
+
+    <footer style="text-align:center;padding:1em;background:#232f3e;color:#fff;">
+        &copy; 2025 Real-Time News. Powered by public APIs.
+    </footer>
+
+    <!-- Example JavaScript for fetching news (uses placeholder APIs) -->
+    <script>
+        async function fetchNews(endpoint, listId) {
+            try {
+                const res = await fetch(endpoint);
+                const data = await res.json();
+                const list = document.getElementById(listId);
+                list.innerHTML = '';
+                data.articles.slice(0,5).forEach(article => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<a href="${article.url}" target="_blank">${article.title}</a><br><small>${article.source.name}</small>`;
+                    list.appendChild(li);
+                });
+            } catch (e) {
+                document.getElementById(listId).innerHTML = '<li>Unable to load news.</li>';
+            }
+        }
+        // Example endpoints (replace with your actual API keys)
+        fetchNews('https://newsapi.org/v2/top-headlines?category=business&q=currency&apiKey=YOUR_API_KEY', 'currency-news');
+        fetchNews('https://newsapi.org/v2/top-headlines?category=science&apiKey=YOUR_API_KEY', 'science-news');
+        fetchNews('https://newsapi.org/v2/top-headlines?category=technology&apiKey=YOUR_API_KEY', 'tech-news'); });
+  
+    </script>
 </body>
 </html>
+   
