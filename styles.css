@@ -240,3 +240,5 @@ header p {
     align-items: center;
   }
 }
+#currency-ticker { background: #f3fcff !important; color: #0c3047; }
+
