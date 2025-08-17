@@ -96,3 +96,51 @@ async function fetchNews() {
 
 // Run news on page load
 window.onload = fetchNews;
+// =================== LIVE NEWS (technology, science, trading) =====================
+async function fetchLiveNews() {
+  // NewsAPI.org example (replace API_KEY and country as needed)
+  const apiKey = "YOUR_NEWSAPI_KEY";
+  const endpoints = [
+    `https://newsapi.org/v2/top-headlines?country=in&category=business&q=trading&apiKey=${apiKey}`,
+    `https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=${apiKey}`,
+    `https://newsapi.org/v2/top-headlines?country=in&category=science&apiKey=${apiKey}`,
+  ];
+
+  let articles = [];
+  for (let url of endpoints) {
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      if (data.articles) articles.push(...data.articles.slice(0, 3)); // Show 3 per category
+    } catch (e) { }
+  }
+
+  if (!articles.length) {
+    document.getElementById('news-ticker').innerHTML = "<span>Could not fetch live news!</span>";
+    return;
+  }
+
+  document.getElementById('news-ticker').innerHTML =
+    articles.map(a =>
+      `<span><b>[${a.source.name}]</b> ${a.title.replace(/ - [^-]+$/,'')}</span>`
+    ).join(' | ');
+}
+
+// ======================= LIVE CURRENCY (USD, EUR, INR, etc.) ======================
+async function fetchCurrency() {
+  // Example using exchangerate.host
+  const currencies = ['USD', 'EUR', 'INR', 'JPY', 'GBP', 'BTC'];
+  try {
+    const res = await fetch("https://api.exchangerate.host/latest?base=USD&symbols=" + currencies.join(','));
+    const data = await res.json();
+    let ticker = "<b>Live Currency:</b> ";
+    for (let curr of currencies) {
+      if (data.rates[curr])
+        ticker += `1 USD = ${data.rates[curr].toFixed(2)} ${curr} | `;
+    }
+    document.getElementById('currency-ticker').innerHTML = ticker;
+  } catch {
+    document.getElementById('currency-ticker').innerHTML = "Currency API error!";
+  }
+}
+
