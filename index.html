@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brilliant AI Assistant</title>
+  <!-- Google Fonts for a beautiful look -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Google Sign-In client (REPLACE with your own Client ID) -->
+  <meta name="google-signin-client_id" content="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+  <!-- Header / Landing Section -->
+  <header>
+    <h1>Brilliant AI</h1>
+    <p>The Most Powerful AI Chatbot with Live Trading and Science-Tech News</p>
+    <div id="g_id_onload"
+      data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com"
+      data-callback="onSignIn"
+      data-auto_prompt="false">
+    </div>
+    <div class="g_id_signin"
+      data-type="standard"
+      data-size="large"
+      data-theme="outline"
+      data-text="sign_in_with"
+      data-shape="rectangular"
+      data-logo_alignment="left">
+    </div>
+    <button id="openChatbot">Open Chatbot</button>
+  </header>
+
+  <!-- News Section -->
+  <section id="news">
+    <h2>Latest Trading & Tech News</h2>
+    <div id="newsContainer"></div>
+  </section>
+
+  <!-- Chatbot Component -->
+  <div id="chatbot" class="chatbot-hidden">
+    <div class="chatbot-header">
+      <h2>Ask Brilliant AI</h2>
+      <button id="closeChatbot">&times;</button>
+    </div>
+    <div id="chatbox"></div>
+    <form id="chatForm">
+      <input type="text" id="userInput" placeholder="Ask something brilliant..." required autocomplete="off">
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <!-- Google AdSense (Put your Google AdSense script where allowed) -->
+  <div class="adsense-container">
+    <!-- Example: Replace this with your real AdSense code -->
+    <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+      data-ad-slot="YYYYYYYYYY"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+  </div>
+  <script src="app.js"></script>
+  <!-- AdSense loader -->
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</body>
+</html>
