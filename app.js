@@ -143,4 +143,9 @@ async function fetchCurrency() {
     document.getElementById('currency-ticker').innerHTML = "Currency API error!";
   }
 }
+fetchLiveNews();
+fetchCurrency();
+setInterval(fetchLiveNews, 2 * 60 * 1000);    // Refresh news every 2 minutes
+setInterval(fetchCurrency, 60 * 1000);        // Refresh currencies every 1 minute
+
 
